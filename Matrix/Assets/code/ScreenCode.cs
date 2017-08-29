@@ -10,12 +10,14 @@ public class ScreenCode : MonoBehaviour {
     public Text symbol;
     private float symbolWidth = 0;
     private float symbolHeight = 0;
-    public byte lightSuber = 17;
+    public float lightSuber = 170;
     private int mX = 0;
     private int mY = 0;
+    public int offsetWidth=10;
     private Color[,] lightMatrix;
     private Text[,] symbols;
     float time;
+    float animationTime;
     // Use this for initialization
     void Start () {
         if (autoSize)
@@ -35,41 +37,92 @@ public class ScreenCode : MonoBehaviour {
         {
             for (int j=0;j<mY;j++)
             {
-                lightMatrix[i, j] = new Color32(0, 255, 0, (byte)Random.Range(50,255));
-                Text newSym= Instantiate(symbol, new Vector3((i*symbolWidth), (j*symbolHeight)+symbolHeight*2, 0),symbol.transform.rotation,this.transform);
+                lightMatrix[Random.Range(0, mX), Random.Range(0, mY)] = new Color32(0, 255, 0,255);
+                Text newSym= Instantiate(symbol, new Vector3((i*symbolWidth),(-(j*symbolHeight))+ height, 0),symbol.transform.rotation,this.transform);
                 newSym.color =  lightMatrix[i, j];
-                symbols[i,j] = newSym;
+                 newSym.name="x="+i+" y="+j;
+                symbols[i, j] = newSym;
             }
         }
     }
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
+    int x=0, y=0;
 	void Update () {
         time+= Time.deltaTime;
-        if(time>2)
+        animationTime += Time.deltaTime;
+        if(time>5)
         {
             for (int i = 0; i < mX; i++)
             {
-                lightMatrix[i, mY-1].a = Random.Range(254, 256);
+                lightMatrix[i, 0].a = 1;// Random.Range(0.9f, 1f);
             }
+            time = 0;
         }
-        for (int i = 0; i < mX; i++)
-        {
-            for (int j = 0; j < mY; j++)
+        
+            y++;
+            if ((x + 1) == mX)
             {
-                if (lightMatrix[i, j].a >= 220)
+                x = 0;
+               
+            }
+            if ((y + 1) >= mY)
+            {
+                y = 0;
+                x++;
+            }
+            //if (lightMatrix[x, y].a >= 0.9)
+            //{if (animationTime > 0.00001)
+            //{
+                
+            //    for (int l = y; l >=0; l--)
+            //    {
+            //        if ((l - 1) != mY-1)
+            //        {
+            //            lightMatrix[x, l + 1].a = lightMatrix[x, l].a;
+            //            lightMatrix[x, l].a -= lightSuber;
+            //            //lightMatrix[x, l+1].a -= lightSuber;
+            //            Debug.Log("Color.a=" + lightMatrix[x, l].a);
+            //        }
+            //    }
+            //    if ((y + 1) != mY)
+            //    {
+            //        y += 1;
+            //    }
+            //    animationTime = 0;
+            //}
+            //}
+            
+        
+
+            for (int i = 0; i < mX; i++)
+            {
+                for (int j = 0; j < mY; j++)
                 {
-                    for (int l=j;l>=0;l--)
+                if (lightMatrix[x, y].a >= 0.9)
+                {
+                    if (animationTime > 0.00001)
                     {
-                        if ((l - 1) != -1)
+
+                        for (int l = j; l >= 0; l--)
                         {
-                            lightMatrix[i, l- 1] = lightMatrix[i, j];
-                            lightMatrix[i, l].a -= lightSuber;
+                            if ((l - 1) != mY - 1)
+                            {
+                                lightMatrix[x, l + 1].a = lightMatrix[x, l].a;
+                                lightMatrix[x, l].a -= lightSuber;
+                                //lightMatrix[x, l+1].a -= lightSuber;
+                                Debug.Log("Color.a=" + lightMatrix[x, l].a);
+                            }
                         }
+                        //if ((j + 1) != mY)
+                        //{
+                        //    j += 1;
+                        //}
+                        animationTime = 0;
                     }
                 }
                 symbols[i, j].color = lightMatrix[i, j];
+                }
             }
-        }
-	}
+       	}
 }

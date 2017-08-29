@@ -142,6 +142,8 @@ MonoBehaviour:
   height: 0
   autoSize: 1
   symbol: {fileID: 114040930394282006, guid: 64a046eed115b9d42ac9dcdf75a75143, type: 2}
+  lightSuber: 0.1
+  offsetWidth: 100
 --- !u!114 &833129398
 MonoBehaviour:
   m_ObjectHideFlags: 0
