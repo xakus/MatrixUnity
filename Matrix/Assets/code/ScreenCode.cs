@@ -11,7 +11,8 @@ public class ScreenCode : MonoBehaviour {
     public Text symbol;
     private float symbolWidth = 0;
     private float symbolHeight = 0;
-    public float lightSuber = 170;
+    public float lightSuberNum = 170;
+    private  float lightSuber=0.0f;
     private int mX = 0;
     private int mY = 0;
     public int step=10;
@@ -59,7 +60,7 @@ public class ScreenCode : MonoBehaviour {
             Application.Quit();
             Debug.Log("q");
         }
-        lightSuber = Random.Range(0.01f, 0.08f);
+        
         time+= Time.deltaTime;
         
         if(time>0.01)
@@ -93,12 +94,14 @@ public class ScreenCode : MonoBehaviour {
             
        
     }
-
+    
     private void thr()
     {
+
         while (threadFlag)
         {
-            
+            lightSuber = ((float)new System.Random().Next(1, 100)) / lightSuberNum;
+            Debug.Log(lightSuber);
             for (int i = 0; i < mX; i += step)
             {
                 
