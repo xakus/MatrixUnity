@@ -19,7 +19,7 @@ public class Symbol : MonoBehaviour {
         if (time >= wait)
         {
             wait = Random.Range(0.1f, 5.0f);
-            text.text = ((char) Random.Range(50,110)).ToString();
+            text.text = ((char) Random.Range(33,127)).ToString();
             time = 0.0f;
         }
 	}

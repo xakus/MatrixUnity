@@ -88,6 +88,7 @@ public class ScreenCode : MonoBehaviour {
                     lightMatrix[i, j] = new Color(0f, 1f, 0f, lightMatrix[i, j].a);
                 }
                 symbols[i, j].color = lightMatrix[i, j];
+                symbols[i, j].GetComponent<Outline>().effectColor =new Color(0,1,0, lightMatrix[i, j].a/2f);
 
             }
         }
@@ -100,7 +101,7 @@ public class ScreenCode : MonoBehaviour {
 
         while (threadFlag)
         {
-            lightSuber = ((float)new System.Random().Next(1, 100)) / lightSuberNum;
+            lightSuber = ((float)new System.Random().Next(0, 300)) / lightSuberNum;
             Debug.Log(lightSuber);
             for (int i = 0; i < mX; i += step)
             {
@@ -110,7 +111,7 @@ public class ScreenCode : MonoBehaviour {
                     
                         if ((l + 1) != mY)
                         {
-                        Thread.SpinWait(5000);
+                        Thread.SpinWait(8000);
                             lightMatrix[i, l + 1].a = lightMatrix[i, l].a;
                             lightMatrix[i, l].a -= lightSuber;
 
