@@ -113,6 +113,7 @@ public class ScreenCode : MonoBehaviour {
                         {
                         Thread.SpinWait(8000);
                             lightMatrix[i, l + 1].a = lightMatrix[i, l].a;
+                        if(lightMatrix[i, l + 1].a>0.05f)
                             lightMatrix[i, l].a -= lightSuber;
 
                         }
