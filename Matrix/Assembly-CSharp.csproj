@@ -53,6 +53,8 @@
   <ItemGroup>
      <Compile Include="Assets\code\ScreenCode.cs" />
      <Compile Include="Assets\code\Symbol.cs" />
+     <Compile Include="Assets\code\TVShader.cs" />
+     <None Include="Assets\shader\CRTShader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

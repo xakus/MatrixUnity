@@ -42,7 +42,7 @@ public class ScreenCode : MonoBehaviour {
             for (int j=0;j<mY;j++)
             {
                 lightMatrix[Random.Range(0, mX), Random.Range(0, mY)] = new Color32(0, 255, 0,0);
-                Text newSym= Instantiate(symbol, new Vector3((i*symbolWidth),(-(j*symbolHeight))+ height, 0),symbol.transform.rotation,this.transform);
+                Text newSym= Instantiate(symbol, new Vector3((i*symbolWidth* this.transform.localScale.x)-(width/2)*this.transform.localScale.x, (-(j*symbolHeight* this.transform.localScale.y))+ (height/2)*this.transform.localScale.y, 0),symbol.transform.rotation,this.transform);
                 newSym.color =  lightMatrix[i, j];
                  newSym.name="x="+i+" y="+j;
                 symbols[i, j] = newSym;
